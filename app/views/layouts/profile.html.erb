@@ -2,7 +2,7 @@
 <div class="row">
     <div class="large-12 columns">
         <div class="large-2 columns">
-            <img src="http://placehold.it/160x160" class="profile-image" alt="" />
+            <%= image_tag @user.avatar_url, class: 'profile-image' %>
         </div>
 
         <div class="large-10 columns">
@@ -13,13 +13,13 @@
             <div class="button-bar">
                 <ul class="button-group radius">
                     <li>
-                        <%= link_to "Konular", user_path(@user, sayfa: 'konular'),class: 'small button secondary' %>
+                        <%= link_to "Konular", profile_path(@user, sayfa: 'konular'),class: 'small button secondary' %>
                     </li>
                     <li>
-                        <%= link_to "Yorumlar", user_path(@user, sayfa: 'yorumlar'), class: 'small button secondary'%>
+                        <%= link_to "Yorumlar", profile_path(@user, sayfa: 'yorumlar'), class: 'small button secondary'%>
                     </li>
                     <li>
-                        <%= link_to "Profilimi düzenle", edit_user_path(@user),class: 'small button secondary'%>
+                        <%= link_to "Profilimi düzenle", edit_profile_path(@user),class: 'small button secondary'%>
                     </li>
                     <li>
                         <%= link_to "Hesabımı sil.",@user, method: :delete,data:{confirm: 'Hesabınızı silmek istediğinize...?'},class: 'small button alert' %>
