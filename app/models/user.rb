@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
-  
+
   validates :username,    presence:   true,
                           uniqueness: { case_sensitive: false },
                           length:     { in: 4..12 },
@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates :email,       presence:   true,
                           uniqueness: { case_sensitive: false },
                           email:      true
-  validates :password,    presence:   true,
-                          length:     { minimum:6 }
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
