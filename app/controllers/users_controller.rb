@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   before_action :select_user, only: [:show, :edit, :update, :destroy]
-  
   def new
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
-    
+
     if @user.save
+      login(@user)
       redirect_to profile_path(@user), notice: 'Aramıza hoş geldin!'
     else
       render :new
@@ -25,29 +25,29 @@ class UsersController < ApplicationController
     end
 
   end
-  
+
   def edit
     render layout: "profile"
   end
-  
+
   def update
     update_params = user_params
     if update_params.has_key?(:password)
-      update_params.delete([:password, :password_confirmation])        
+      update_params.delete([:password, :password_confirmation])
     end
-    
+
     if @user.update(update_params)
       redirect_to profile_path(@user), notice: 'Profil bilgileriniz güncellendi.'
     else
       render :edit, layout: "profile"
     end
   end
-  
+
   def destroy
     @user.destroy
-    redirect_to '/'    
+    redirect_to '/'
   end
-  
+
   private
 
   def user_params
