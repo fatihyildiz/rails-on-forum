@@ -6,7 +6,10 @@ RailsOnForum::Application.routes.draw do
   resource :forums, only: [:index, :show], path: 'forumlar' do
     resource :topics, only:[:new, :create], path: 'konular',path_names: {new: 'yeni'}
   end
-  resource :topics, except: [:index, :new, :create], path: 'konular', path_names: {edit: 'duzenle'}
+  resource :topics, except: [:index, :new, :create], path: 'konular', path_names: {edit: 'duzenle'} do
+    resource :comments, only: [:new, :create], path: 'yorumlar', path_names: {new: 'yeni'}
+  end
+  resource :comments, only: [:edit, :update, :destroy], path: 'yorumlar', path_names: {edit: 'duzenle'}
   resources :users, only: [:create, :update, :destroy]
   get '/kaydol', to: 'users#new', as: :register
   get '/:id', to: 'users#show', as: :profile
