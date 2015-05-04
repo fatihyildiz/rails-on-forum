@@ -20,14 +20,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @data=[]
+    sayfa = params[:sayfa] || 'konular'
 
-    if params[:sayfa]
-      render layout: "profile", locals: {page: params[:sayfa]}
+    if sayfa == 'konular'
+      @data = @user.topics
     else
-      render layout: "profile", locals: {page: 'konular'}
+      @data = []
     end
 
+    render layout: "profile", locals: {page: sayfa}
   end
 
   def edit
